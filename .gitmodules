@@ -1,0 +1,3 @@
+[submodule "ansible-playbook-fuse"]
+	path = ansible-playbook-fuse
+	url = https://github.com/monodot/ansible-playbook-fuse
