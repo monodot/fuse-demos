@@ -1,0 +1,12 @@
+---
+# PLAY
+- name: Provision JBoss Fuse
+  hosts: tag_ansible_group_fuseservers
+  remote_user: centos
+  become: yes
+  become_user: root
+  become_method: sudo
+  roles:
+  - { role: '../ansible-playbook-fuse/roles/fuse-standalone', esb_name: 'esb01', port_offset: '0', esb_type: 'default' }
+  tags:
+  - karaf 
