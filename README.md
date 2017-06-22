@@ -5,8 +5,20 @@ Scripts, resources and walkthroughs for demonstrating specific functionality/use
 **NOTE: These scripts come without warranty, and most definitely should NOT be used in a production environment.**
 
 - **ansible-playbook-fuse** - (Git submodule) Ansible roles for provisioning JBoss Fuse servers
-- **fuse-patch** - a very brief guide to the JBoss Fuse patching process
+- **fuse-patching** - a very brief guide to the JBoss Fuse patching process
 - **fuse-standalone** - Provisions a single Fuse instance on AWS and (optionally) deploys some demo features
+
+## Pre-requisites
+
+Check that you have satisfied this requirements first before running the playbooks:
+
+- Ansible - I use `pip install ansible`
+- Download the appropriate JBoss Fuse distribution (zip) and copy to `/tmp`
+
+(Optionally) If you're using the playbooks to create EC2 instances on AWS:
+
+- Get the `aws` command line tool for your operating system, then use `aws configure` to set up your AWS access keys
+- Edit the `ansible.cfg` file and set the location of your private key for SSHing to your EC2 instances
 
 ## Notes on using AWS with these demos
 

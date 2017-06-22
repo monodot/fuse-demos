@@ -5,8 +5,8 @@
   connection: local
   gather_facts: false
 
-  vars_files:
-  - group_vars/all.yaml
+  #vars_files:
+  #- group_vars/all.yaml
 
   tasks:
   - name: Create Security Group
@@ -38,7 +38,7 @@
       type: "{{ ec2_instance_type }}"
       image: "{{ ec2_image }}"
       region: "{{ ec2_region }}"
-      instance_tags: "{ 'ansible_group':'fuseservers', 'type':'{{ ec2_instance_type }}', 'group':'{{ ec2_security_group }}', 'tag':'{{ ec2_tag }}' }"
+      instance_tags: "{ 'ansible_group':'{{ ec2_ansible_group }}', 'type':'{{ ec2_instance_type }}', 'security_group':'{{ ec2_security_group }}', 'tag':'{{ ec2_tag }}' }"
       count: "{{ ec2_instance_count }}"
       wait: true
     register: ec2

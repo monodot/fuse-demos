@@ -1,0 +1,4 @@
+---
+- include: fabricrootnodes.yml
+#- include: fabriccontainernodes.yml  
+  

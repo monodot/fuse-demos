@@ -1,5 +1,4 @@
 # Based on: https://raw.githubusercontent.com/ansible/ansible-examples
-# Here are variables related to the standalone JBoss installation
 
 # AWS specific variables
 ec2_access_key:
@@ -15,12 +14,37 @@ ec2_keypair: ansible
 ec2_image: ami-0d063c6b
 
 ec2_instance_type: t2.medium
-ec2_security_group: fuse-demo
-ec2_instance_count: 1
-ec2_tag: fuse-demo
+ec2_security_group: fuse-fabric-demo
+ec2_tag: fuse-fabric-default
 ec2_object_name_prefix: fuse_
 ec2_hosts: all
 wait_for_port: 22
+
+# Configure the AWS instances to create for this scenario
+ec2_instances:
+- name: "fuse-fabric-default-001"
+  image: "{{ ec2_image }}"
+  type: "{{ ec2_instance_type }}"
+  tags: 
+    fabric_role: root
+    ansible_group: "fuse-fabric-default-master"
+    type: "{{ ec2_instance_type }}"
+    security_group: "{{ ec2_security_group }}"
+    tag: "{{ ec2_tag }}"
+  group: "{{ ec2_security_group }}"
+  ssh_user: "centos"
+- name: "fuse-fabric-default-002"
+  image: "{{ ec2_image }}"
+  type: "{{ ec2_instance_type }}"
+  tags: 
+    fabric_role: container
+    ansible_group: "fuse-fabric-default-container"
+    type: "{{ ec2_instance_type }}"
+    security_group: "{{ ec2_security_group }}"
+    tag: "{{ ec2_tag }}"
+  group: "{{ ec2_security_group }}"
+  ssh_user: "centos"
+
 
 
 # Vars for Fuse
@@ -99,77 +123,3 @@ app_home: '/opt/fuse/applications'
 
 # Maven Repository
 #maven_repository_manager: http://nexus:8081/nexus/content/groups/public
-
-# Camel A-MQ Samples from https://github.com/rmarting/camel-amq-samples/tree/karaf-fuse-6.3.0
-# Camel CXF Samples from https://github.com/rmarting/fuse-demo/tree/karaf-fuse-6.3.0
-
-# Application List to deploy
-applications:
-  -
-    groupId: com.redhat.camel
-    artifactId: camel-amq-consumer
-    version: 1.1.0-SNAPSHOT
-  -
-    groupId: com.redhat.camel
-    artifactId: camel-amq-producer
-    version: 1.1.0-SNAPSHOT
-  -
-    groupId: com.redhat.camel
-    artifactId: camel-amq-forwarder
-    version: 1.1.0-SNAPSHOT
-
-# Bundles List to deploy
-bundles:
-  -
-    groupId: com.redhat.fuse.demo
-    artifactId: camel-cxfrs
-    version: 1.1.0-SNAPSHOT
-  -
-    groupId: com.redhat.fuse.demo
-    artifactId: camel-cxf
-    version: 1.1.0-SNAPSHOT
-
-# Features List to deploy
-
-features:
-  -
-    groupId: com.redhat.fuse.demo
-    artifactId: fuse-demo-features
-    version: 1.1.0-SNAPSHOT
-    name: fuse-demo-features
-
-# Application List to undeploy
-applications_undeploy:
-  -
-    groupId: com.redhat.camel
-    artifactId: camel-amq-consumer
-    version: 1.1.0-SNAPSHOT
-  -
-    groupId: com.redhat.camel
-    artifactId: camel-amq-producer
-    version: 1.1.0-SNAPSHOT
-  -
-    groupId: com.redhat.camel
-    artifactId: camel-amq-forwarder
-    version: 1.1.0-SNAPSHOT
-
-# Bundles List to undeploy
-bundles_undeploy:
-  -
-    groupId: com.redhat.fuse.demo
-    artifactId: camel-cxfrs
-    version: 1.1.0-SNAPSHOT
-  -
-    groupId: com.redhat.fuse.demo
-    artifactId: camel-cxf
-    version: 1.1.0-SNAPSHOT
-
-# Features List to undeploy
-
-features_undeploy:
-  -
-    groupId: com.redhat.fuse.demo
-    artifactId: fuse-demo-features
-    version: 1.1.0-SNAPSHOT
-    name: fuse-demo-features
-

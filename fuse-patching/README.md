@@ -8,7 +8,7 @@ You will need the following from the Red Hat Customer Portal:
 - Patch Mechanism upgrade distribution (_Red Hat JBoss Fuse 6.x Rollup N Patch Management Package_ - e.g. `patch-management-package-6.3.0.redhat-yyy.zip`) (if applicable to this Fuse version)
 - Latest Rollup Patch distribution (_Red Hat JBoss Fuse 6.x Rollup N on Karaf_ - e.g. `jboss-fuse-karaf-6.3.0.redhat-yyy.zip`))
 
-# Steps
+## Steps (for Fuse standalone)
 
 1. Use the Ansible playbook provided to provision a standalone Fuse container, using the GA release.
 2. Copy the Patch Mechanism upgrade distribution to the remote server and follow the steps in [Configuring and Running JBoss Fuse - Chapter 19. Applying Patches][1].
