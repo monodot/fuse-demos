@@ -12,4 +12,14 @@ The resulting list of features should be: `camel-twitter camel-swagger camel-rab
 
 To verify in Fuse:
 
-    profile:display my-profile
+    JBossFuse:karaf@root> profile:display my-profile
+
+    ....
+    Container settings
+    ----------------------------
+    Features :
+        camel-dropbox
+        camel-twitter
+        camel-rabbitmq
+        camel-swagger
+
