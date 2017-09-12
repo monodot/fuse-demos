@@ -18,8 +18,6 @@
   <name>CleverBuilder :: fabric-profile-maven-inheritance :: profile</name>
   
   <properties>
-    <!--<jboss.fuse.bom.version>6.3.0.redhat-262</jboss.fuse.bom.version>-->
-    <!--<fabric.version>1.2.0.redhat-630262</fabric.version>-->
     <fabric8.profile>my-profile</fabric8.profile>
     <fabric8.features>${my.featurelist} camel-rabbitmq camel-dropbox</fabric8.features>
   </properties>
