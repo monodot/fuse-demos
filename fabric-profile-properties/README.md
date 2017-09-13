@@ -1,17 +1,17 @@
 # fabric-profile-properties
 
-Demonstrates how to use the Fabric Maven plugin to create a Fabric profile which contains a single OSGi Config Admin **PID** (collection of properties).
+Demonstrates how to use the [Fabric8 Maven plugin][fmp] to create a Fabric profile in a JBoss Fuse server, containing a single [OSGi Config Admin **PID**][felixpid] (collection of properties).
 
 - The properties are defined in: `src/main/fabric8/my-properties.properties`
-- This will create a PID inside the Fabric profile called `my-properties`
+- A PID called `my-properties` will be created inside the Fabric profile
 
-To deploy, first start a local Fuse Fabric server and then run:
+To deploy, first start up your JBoss Fuse Fabric server and then, on the root node, run:
 
     mvn fabric8:deploy
     
 This will create a Fabric profile called `cleverbuilder-profile`.
 
-To verify that the profile and PID have been deployed - use `profile-display` from the Fabric root container command line:
+To verify that the profile and PID have been deployed - log on to the Karaf console and use the `fabric:profile-display` command. This will show the properties:
 
     JBossFuse:karaf@root> profile-display cleverbuilder-profile
     Profile id: cleverbuilder-profile
@@ -31,5 +31,8 @@ To verify that the profile and PID have been deployed - use `profile-display` fr
       my.foo bar
       my.bar foo
 
+You can also check the properties from the web console (Hawtio).
 
-    
+
+[fmp]: https://fabric8.io/gitbook/mavenPlugin.html
+[felixpid]: http://felix.apache.org/documentation/subprojects/apache-felix-config-admin.html
