@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.cleverbuilder.fusedemos</groupId>
+    <artifactId>tx-db-camel-amq-fail</artifactId>
+    <version>1.0.0-SNAPSHOT</version>
+    <packaging>bundle</packaging>
+    <name>Clever Builder :: fuse-demos :: tx-db-camel-amq-fail</name>
+    <description>Transaction between two parties without XA</description>
+
+    <properties>
+      <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+      <version.compiler.plugin>2.3.1</version.compiler.plugin>
+      <version.maven-bundle-plugin>2.3.7</version.maven-bundle-plugin>
+      <maven.compiler.target>1.7</maven.compiler.target>
+      <maven.compiler.source>1.7</maven.compiler.source>
+      <maven-resources-plugin-version>2.6</maven-resources-plugin-version>
+      <build-helper-maven-plugin-version>1.9.1</build-helper-maven-plugin-version>
+
+      <!-- the version of the BOM, defining all the dependency versions -->
+      <fabric8.bom.version>1.2.0.redhat-630224</fabric8.bom.version>
+
+    </properties>
+
+    <dependencyManagement>
+      <dependencies>
+        <dependency>
+          <groupId>io.fabric8.bom</groupId>
+          <artifactId>fabric8-bom</artifactId>
+          <version>${fabric8.bom.version}</version>
+          <type>pom</type>
+          <scope>import</scope>
+        </dependency>
+      </dependencies>
+    </dependencyManagement>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.apache.camel</groupId>
+            <artifactId>camel-blueprint</artifactId>
+        </dependency>
+
+        <!-- ActiveMQ connectivity for Camel -->
+        <dependency>
+            <groupId>org.apache.activemq</groupId>
+            <artifactId>activemq-osgi</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.derby</groupId>
+            <artifactId>derby</artifactId>
+            <version>10.10.1.1</version>
+        </dependency>
+    </dependencies>
+
+    <build>
+      <finalName>${project.artifactId}</finalName>
+      <plugins>
+        <plugin>
+          <groupId>org.apache.felix</groupId>
+          <artifactId>maven-bundle-plugin</artifactId>
+          <version>${version.maven-bundle-plugin}</version>
+          <extensions>true</extensions>
+        </plugin>
+      </plugins>
+    </build>
+</project>
