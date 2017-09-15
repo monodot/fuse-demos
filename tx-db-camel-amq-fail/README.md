@@ -29,6 +29,6 @@ Then, in JBoss Fuse:
 
 Notice how:
 
-- Every 10 seconds, Camel will attempt to push 5 messages into an ActiveMQ queue called `FOO`, in a route which is labelled as `<transacted/>`
+- Every 10 seconds, Camel will attempt to push 5 messages into an ActiveMQ queue called `FOO`, in a route which is labelled as `<transacted/>` but is not correctly configured
 - The SQL insert statement will fail, because the given column does not exist
 - Yet... the 5 messages are still inserted into ActiveMQ
