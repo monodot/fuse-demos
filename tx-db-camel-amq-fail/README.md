@@ -35,7 +35,5 @@ Notice how:
 - However... the 5 messages are still inserted into ActiveMQ
 - Therefore the operation was not atomic
 
-![Not Atomic][not-atomic]
-
-[not-atomic]: https://media.giphy.com/media/ZjPgFEsF6eiRi/giphy.gif
-
+**Oh your hair is beautiful  
+Oh, toni-i-i-i-ight, (NOT) atomic**
