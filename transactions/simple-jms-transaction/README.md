@@ -10,8 +10,8 @@ First, build the project and install it into your local Maven repository:
 
 Then, in JBoss Fuse:
 
-    JBossFuse:karaf@root> features:addurl mvn:com.cleverbuilder.fuse-demos/simple-jms-transaction/1.0-SNAPSHOT/xml/features
-    JBossFuse:karaf@root> features:install simple-jms-transaction
+    JBossFuse:karaf@root> features:install camel-amq
+    JBossFuse:karaf@root> osgi:install -s mvn:com.cleverbuilder.fuse-demos/simple-jms-transaction/1.0-SNAPSHOT
 
 By default, this will successfully push 5 messages into the queue `FOO`, every 10 seconds. You can observe the message count increasing in the Hawtio console.
 
