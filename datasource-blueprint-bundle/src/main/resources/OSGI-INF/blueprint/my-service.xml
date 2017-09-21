@@ -17,27 +17,24 @@
 -->
 <blueprint xmlns="http://www.osgi.org/xmlns/blueprint/v1.0.0" default-activation="lazy">
 
-    <!--<bean id="dataSource" class="org.apache.commons.dbcp2.BasicDataSource">-->
-    <bean id="derbyDataSource" class="org.apache.derby.jdbc.ClientDataSource"
-		destroy-method="close">
-		<property name="driverClassName" value="org.apache.derby.jdbc.EmbeddedDriver" />
-		<property name="initialSize" value="10" />
-		<property name="url" value="jdbc:derby:memory:integration;create=true" />
-		<property name="username" value="int" />
-		<property name="password" value="int" />
+    <!-- Start an in-memory Derby database -->
+<!--
+    <bean id="myDataSource" class="org.apache.derby.jdbc.EmbeddedDataSource">
+        <property name="createDatabase" value="create"/>
+        <property name="databaseName" value="test"/>
+    </bean>
+-->
+
+    <!-- Create a MySQL datasource -->
+    <bean class="com.mysql.jdbc.jdbc2.optional.MysqlDataSource" id="myDataSource">
+        <property name="serverName" value="localhost"></property>
+        <property name="databaseName" value="customers"></property>
+        <property name="port" value="3306"></property>
+        <property name="user" value="customers"></property>
+        <property name="password" value="password"></property>
     </bean>
 
-    <!--
-    <bean class="com.mysql.jdbc.jdbc2.optional.MysqlDataSource" id="mysqlDatasource">
-        <property name="serverName" value="localhost"></property>
-        <property name="databaseName" value="username_here"></property>
-        <property name="port" value="3306"></property>
-        <property name="user" value="root"></property>
-        <property name="password" value="password_here"></property>
-   </bean>
-   -->
-
-    <service id="customerDS" interface="javax.sql.DataSource" ref="derbyDataSource">
+    <service id="customerDS" interface="javax.sql.DataSource" ref="myDataSource">
         <service-properties>
             <entry key="osgi.jndi.service.name" value="jdbc/customerdb"/>
         </service-properties>

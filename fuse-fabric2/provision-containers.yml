@@ -1,0 +1,13 @@
+---
+# PLAY - for Fabric container nodes
+
+- hosts: localhost
+  remote_user: root
+
+  tasks:
+  - name: Wait for container start
+    shell: "/Users/tdonohue/Documents/servers/fuse630/jboss-fuse-6.3.0.redhat-262/bin/client -u admin -p admin 'fabric:container-info ssh1' | grep 'Provision Status' | tr -s ' ' | awk -F\": \" '{print $2}'"
+    register: result
+    until: result.stdout.find("success") != -1
+    retries: 25
+    delay: 10
