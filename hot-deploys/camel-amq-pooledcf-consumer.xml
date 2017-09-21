@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<blueprint xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xmlns:cm="http://aries.apache.org/blueprint/xmlns/blueprint-cm/v1.1.0"
+           xmlns="http://www.osgi.org/xmlns/blueprint/v1.0.0"
+           xsi:schemaLocation="http://www.osgi.org/xmlns/blueprint/v1.0.0 http://www.osgi.org/xmlns/blueprint/v1.0.0/blueprint.xsd
+
+	       http://aries.apache.org/blueprint/xmlns/blueprint-cm/v1.1.0 http://aries.apache.org/schemas/blueprint-cm/blueprint-cm-1.1.0.xsd">
+
+    <bean id="amqConnectionFactory" class="org.apache.activemq.ActiveMQConnectionFactory">
+        <property name="brokerURL" value="vm://amq"/> <!-- This is the default broker in Fuse -->
+        <property name="userName" value="admin"/>
+        <property name="password" value="admin"/>
+    </bean>
+
+    <bean id="amqPooledConnectionFactory" class="org.apache.activemq.pool.PooledConnectionFactory" init-method="start"
+          destroy-method="stop">
+        <property name="maxConnections" value="10"/>
+        <property name="maximumActiveSessionPerConnection" value="10"/>
+        <property name="connectionFactory" ref="amqConnectionFactory"/>
+    </bean>
+    
+    <bean id="jmsConfig" 
+       class="org.apache.camel.component.jms.JmsConfiguration">
+        <property name="connectionFactory" ref="amqPooledConnectionFactory"/>
+        <property name="transacted" value="true" />
+        <property name="deliveryPersistent" value="true" />
+        <property name="requestTimeout" value="10000" />
+        <property name="cacheLevelName"  value="CACHE_CONSUMER" />
+
+        <!-- 
+          An initial number of queue consumers, equal to the value of
+          concurrentConsumers below, will be created for each route
+          below that uses an activemq component.
+          
+          For example, if there are 2 activemq subscribers, then (2 x ConcurrentConsumers) consumers will be created.
+          You can verify this in Hawtio:
+          amq > Queue > QUEUE.NAME > Consumer > (clientId) > n(consumerId,...)
+          
+          Each consumer is a separate thread, and can be seen
+          as a "JmsConsumer" thread in Hawtio
+        -->
+        <property name="concurrentConsumers" value="15"/>
+    </bean>
+    
+    <bean id="activemq" 
+        class="org.apache.activemq.camel.component.ActiveMQComponent">
+        <property name="configuration" ref="jmsConfig"/>
+    </bean>
+
+
+    <camelContext xmlns="http://camel.apache.org/schema/blueprint"
+        id="amq-pooledcf-consumer-context">
+        
+        <!-- {concurrentConsumers} consumers will be created for this -->
+        <route id="pooledcf-jms-to-log-route">
+            <from uri="activemq:queue:POOLED.CF?username=admin&amp;password=admin"/>
+            <log message="Receiving message ${body}"/>
+        </route>
+
+        <!-- AND {concurrentConsumers} consumers will be created for this -->
+        <route id="pooledcf-jms-to-log-route-dupe">
+            <from uri="activemq:queue:POOLED.CF?username=admin&amp;password=admin"/>
+            <log message="Receiving message ${body}"/>
+        </route>
+
+        <!-- AND {concurrentConsumers} consumers will be created for this -->
+        <route id="pooledcf-jms-to-log-route-transacted">
+            <from uri="activemq:queue:POOLED.CF?username=admin&amp;password=admin"/>
+            <transacted/>
+            <log message="Receiving message ${body}"/>
+        </route>
+
+    </camelContext>
+
+
+</blueprint>
