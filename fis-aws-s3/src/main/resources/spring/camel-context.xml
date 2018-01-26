@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:camel="http://camel.apache.org/schema/spring"
+       xsi:schemaLocation="
+       http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://camel.apache.org/schema/spring http://camel.apache.org/schema/spring/camel-spring.xsd">
+
+    <camelContext id="camel" xmlns="http://camel.apache.org/schema/spring">
+
+        <route id="main-route">
+            <!--
+            Instead of explicitly configuring the credentials here,
+            the S3 Camel component uses credentials defined in the bean
+            `amazonS3Client`, which is defined in the Application class.
+            We use the '#' notation to reference a bean by name.
+            -->
+            <from id="receiver"
+                  uri="aws-s3://monodot-rh?amazonS3Client=#amazonS3Client&amp;prefix=hello.txt"/>
+
+            <log id="route-log" message=">>> ${body}"/>
+        </route>
+
+    </camelContext>
+
+</beans>
