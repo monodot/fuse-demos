@@ -24,16 +24,16 @@ public abstract class AbstractBigXmlTest extends CamelTestSupport {
         String worker = "    <ws:Worker>\n" +
                 "        <ws:Summary>\n" +
                 "            <ws:Employee_ID>21001</ws:Employee_ID>\n" +
-                "            <ws:Name>Logan McNeil</ws:Name>\n" +
+                "            <ws:Name>Lutricia McNeil</ws:Name>\n" +
                 "        </ws:Summary>\n" +
                 "        <ws:Eligibility>true</ws:Eligibility>\n" +
                 "        <ws:Personal>\n" +
                 "            <ws:Name_Data>\n" +
                 "                <ws:Name_Type>Legal</ws:Name_Type>\n" +
-                "                <ws:First_Name>Logan</ws:First_Name>\n" +
-                "                <ws:Last_Name>McNeil</ws:Last_Name>\n" +
-                "                <ws:Formatted_Name>Logan McNeil</ws:Formatted_Name>\n" +
-                "                <ws:Reporting_Name>McNeil, Logan</ws:Reporting_Name>\n" +
+                "                <ws:First_Name>Lutricia</ws:First_Name>\n" +
+                "                <ws:Last_Name>Sylvester</ws:Last_Name>\n" +
+                "                <ws:Formatted_Name>Lutricia Sylvester</ws:Formatted_Name>\n" +
+                "                <ws:Reporting_Name>Sylvester, Lutricia</ws:Reporting_Name>\n" +
                 "            </ws:Name_Data>\n" +
                 "            <ws:Gender>Female</ws:Gender>\n" +
                 "            <ws:Birth_Date>1971-05-25</ws:Birth_Date>\n" +
@@ -65,7 +65,7 @@ public abstract class AbstractBigXmlTest extends CamelTestSupport {
                 "                <ws:Email_Type>WORK</ws:Email_Type>\n" +
                 "                <ws:Email_Is_Public>true</ws:Email_Is_Public>\n" +
                 "                <ws:Is_Primary>true</ws:Is_Primary>\n" +
-                "                <ws:Email_Address>lmcneil@workday.net</ws:Email_Address>\n" +
+                "                <ws:Email_Address>lSylvester@example.com</ws:Email_Address>\n" +
                 "            </ws:Email_Data>\n" +
                 "            <ws:Tobacco_Use>false</ws:Tobacco_Use>\n" +
                 "        </ws:Personal>\n" +
