@@ -5,7 +5,6 @@ This quickstart shows a simple Apache Camel application that logs a message to t
 This example is implemented using solely the XML DSL (there is no Java code). The source code is provided in the following XML file `src/main/resources/OSGI-INF/blueprint/camel-log.xml`.
 It also shows how Karaf assembly files can be overridden using resources from `src/main/resources/assembly/`. The included sample log file `etc/org.ops4j.pax.logging.cfg` sets the log level to DEBUG.
 
-
 ### Building
 
 The example can be built with
@@ -20,7 +19,7 @@ It is assumed that:
 
 The example can be built and deployed using:
 
-    mvn fabric8:deploy
+    mvn fabric8:deploy -Pfabric8
 
 When the example runs in fabric8, you can use the OpenShift client tool to inspect the status
 

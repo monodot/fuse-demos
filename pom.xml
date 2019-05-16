@@ -20,7 +20,7 @@
 
     <modules>
         <module>karaf-spring-osgi-camel-demo</module>
-        <module>karaf-camel-log-ocp-demo</module>
+        <module>karaf-ocp-camel-log-demo</module>
     </modules>
 
 </project>
