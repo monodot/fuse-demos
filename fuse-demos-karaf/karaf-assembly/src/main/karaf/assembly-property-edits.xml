@@ -1,0 +1,22 @@
+<property-edits xmlns="http://karaf.apache.org/tools/property-edits/1.0.0"
+                xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                xsi:schemaLocation="http://karaf.apache.org/tools/property-edits/1.0.0 http://karaf.apache.org/xsd/property-edits-1.0.0.xsd">
+
+    <edits>
+        <!-- This gets rid of the error: 'Unable to register security provider: java.lang.ClassNotFoundException: org.bouncycastle.jce.provider.BouncyCastleProvider' -->
+        <edit>
+            <file>config.properties</file>
+            <operation>remove</operation>
+            <key>org.apache.karaf.security.providers</key>
+        </edit>
+
+        <!-- Modifies the 'hot-deploy' directory for deploying Blueprint XML files -->
+        <!-- The 'extend' operation appends a comma, and then the given value -->
+        <edit>
+            <file>org.apache.felix.fileinstall-deploy.cfg</file>
+            <operation>extend</operation>
+            <key>felix.fileinstall.dir</key>
+            <value>/etc/karaf-deploy-volume</value>
+        </edit>
+    </edits>
+</property-edits>
