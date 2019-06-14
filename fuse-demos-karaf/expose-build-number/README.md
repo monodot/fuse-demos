@@ -13,6 +13,7 @@ Firstly build, giving your custom build number using the `project.buildnumber` p
 Then deploy into Fuse on Apache Karaf:
 
     karaf@root> osgi:install mvn:xyz.tomd.fusedemos/expose-build-number/1.0-SNAPSHOT
+    karaf@root> features:install camel-jetty
 
 Finally observe the build number returned from an endpoint:
 
