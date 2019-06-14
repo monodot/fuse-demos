@@ -19,6 +19,7 @@
         <module>embedded-artemis-spring</module>
         <module>karaf-assembly-bundle</module>
         <module>karaf-assembly</module>
+        <module>expose-build-number</module>
     </modules>
 
     <profiles>

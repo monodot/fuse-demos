@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<blueprint xmlns="http://www.osgi.org/xmlns/blueprint/v1.0.0">
+
+    <!-- Instantiate a bean from the class -->
+    <bean id="helloService" class="xyz.tomd.fusedemos.karaf.assembly.bundle.HelloServiceImpl"/>
+
+    <!-- Export it in the OSGi Service Registry -->
+    <service ref="helloService" interface="xyz.tomd.fusedemos.karaf.assembly.bundle.HelloService"/>
+
+</blueprint>
