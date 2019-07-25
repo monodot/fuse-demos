@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <artifactId>fuse-demos</artifactId>
+        <groupId>xyz.tomd.fusedemos</groupId>
+        <version>1.0-SNAPSHOT</version>
+        <relativePath>../</relativePath>
+    </parent>
+
+    <artifactId>fuse-demos-spring-boot</artifactId>
+    <packaging>pom</packaging>
+
+    <name>Tom Donohue :: Fuse Demos :: Spring Boot</name>
+
+    <modules>
+        <module>fuse-spring-boot-jax-rs-rest</module>
+        <module>fuse-spring-boot-spring-cloud-contract</module>
+    </modules>
+
+    <profiles>
+        <profile>
+            <id>fuse730</id>
+
+            <!-- This is the default profile -->
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+
+            <properties>
+                <version.org.jboss.redhat-fuse>7.3.0.fuse-730058-redhat-00001</version.org.jboss.redhat-fuse>
+            </properties>
+
+            <dependencyManagement>
+                <dependencies>
+                    <dependency>
+                        <groupId>org.jboss.redhat-fuse</groupId>
+                        <artifactId>fuse-springboot-bom</artifactId>
+                        <version>${version.org.jboss.redhat-fuse}</version>
+                        <scope>import</scope>
+                        <type>pom</type>
+                    </dependency>
+                </dependencies>
+            </dependencyManagement>
+
+        </profile>
+    </profiles>
+
+</project>
