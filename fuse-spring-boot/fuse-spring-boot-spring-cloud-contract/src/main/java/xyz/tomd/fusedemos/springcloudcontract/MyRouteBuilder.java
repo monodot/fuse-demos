@@ -28,7 +28,7 @@ public class MyRouteBuilder extends RouteBuilder {
                 .to("direct:search");
 
         from("direct:search").id("search-route")
-                .log("SEARCH was hit!")
+                .log("Received a search request")
                 .to("mock:fetch-search-results");
     }
 }
