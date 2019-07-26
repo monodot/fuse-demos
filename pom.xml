@@ -18,9 +18,16 @@
         </license>
     </licenses>
 
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    </properties>
+
     <modules>
         <module>karaf-spring-osgi-camel-demo</module>
         <module>karaf-ocp-camel-log-demo</module>
+
+        <module>fuse-karaf</module>
+        <module>fuse-spring-boot</module>
     </modules>
 
 </project>

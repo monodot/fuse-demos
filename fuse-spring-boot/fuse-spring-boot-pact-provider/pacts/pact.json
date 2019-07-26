@@ -1,0 +1,85 @@
+{
+  "consumer": {
+    "name": "myclientapp"
+  },
+  "provider": {
+    "name": "catalogue-search"
+  },
+  "interactions": [
+    {
+      "description": "a request for catalogues",
+      "providerState": "search executes a lookup using queryParams",
+      "request": {
+        "method": "GET",
+        "path": "/api/v1/search",
+        "query": "q=biscuits&bbox=1%2C2%2C3%2C4",
+        "headers": {
+          "Accept": "application/json"
+        }
+      },
+      "response": {
+        "status": 200,
+        "headers": {
+          "Content-Type": "application/json"
+        },
+        "body": [
+          {
+            "id": "1",
+            "name": "Yahoo",
+            "url": "http://yahoo.com"
+          },
+          {
+            "id": "2",
+            "name": "Google",
+            "url": "http://google.com"
+          },
+          {
+            "id": "3",
+            "name": "BBC",
+            "url": "http://bbc.co.uk"
+          }
+        ]
+      }
+    },
+    {
+      "description": "a request for catalogues",
+      "providerState": "a second state",
+      "request": {
+        "method": "GET",
+        "path": "/api/v1/search",
+        "query": "q=biscuits&bbox=1%2C2%2C3%2C4",
+        "headers": {
+          "Accept": "application/json"
+        }
+      },
+      "response": {
+        "status": 200,
+        "headers": {
+          "Content-Type": "application/json"
+        },
+        "body": [
+          {
+            "id": "1",
+            "name": "Yahoo",
+            "url": "http://yahoo.com"
+          },
+          {
+            "id": "2",
+            "name": "Google",
+            "url": "http://google.com"
+          },
+          {
+            "id": "3",
+            "name": "BBC",
+            "url": "http://bbc.co.uk"
+          }
+        ]
+      }
+    }
+  ],
+  "metadata": {
+    "pactSpecification": {
+      "version": "2.0.0"
+    }
+  }
+}
