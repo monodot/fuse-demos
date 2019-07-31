@@ -29,6 +29,7 @@ public class MyRouteBuilder extends RouteBuilder {
 
         from("direct:search").id("search-route")
                 .log("Received a search request")
-                .to("mock:fetch-search-results");
+                .to("jms:queue:MY.QUEUE?exchangePattern=InOnly");
+//                .to("mock:fetch-search-results");
     }
 }

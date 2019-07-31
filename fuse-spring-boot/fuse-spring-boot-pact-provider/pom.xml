@@ -12,7 +12,7 @@
     <artifactId>fuse-spring-boot-pact-provider</artifactId>
 
     <name>Tom Donohue :: Fuse Demos :: Spring Boot :: Pact Provider</name>
-    <description>Using Pact Provider testing with Fuse 7 BOM</description>
+    <description>Using Pact Provider Spring with Fuse 7 BOM</description>
 
     <properties>
         <pact.version>3.6.9</pact.version>
@@ -48,6 +48,10 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-undertow</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.camel</groupId>
+            <artifactId>camel-jms-starter</artifactId>
         </dependency>
 
         <!-- For testing -->
