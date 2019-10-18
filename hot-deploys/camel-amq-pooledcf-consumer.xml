@@ -7,7 +7,7 @@
 	       http://aries.apache.org/blueprint/xmlns/blueprint-cm/v1.1.0 http://aries.apache.org/schemas/blueprint-cm/blueprint-cm-1.1.0.xsd">
 
     <bean id="amqConnectionFactory" class="org.apache.activemq.ActiveMQConnectionFactory">
-        <property name="brokerURL" value="vm://amq"/> <!-- This is the default broker in Fuse -->
+        <property name="brokerURL" value="tcp://localhost:61616"/> <!-- Connect to an AMQ7 broker running on localhost -->
         <property name="userName" value="admin"/>
         <property name="password" value="admin"/>
     </bean>
