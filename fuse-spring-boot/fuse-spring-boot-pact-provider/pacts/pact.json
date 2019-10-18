@@ -3,16 +3,16 @@
     "name": "myclientapp"
   },
   "provider": {
-    "name": "catalogue-search"
+    "name": "my-search-app"
   },
   "interactions": [
     {
-      "description": "a request for catalogues",
+      "description": "a search for things",
       "providerState": "search executes a lookup using queryParams",
       "request": {
         "method": "GET",
         "path": "/api/v1/search",
-        "query": "q=biscuits&bbox=1%2C2%2C3%2C4",
+        "query": "q=biscuits",
         "headers": {
           "Accept": "application/json"
         }
@@ -25,17 +25,17 @@
         "body": [
           {
             "id": "1",
-            "name": "Yahoo",
+            "name": "Rich Tea",
             "url": "http://yahoo.com"
           },
           {
             "id": "2",
-            "name": "Google",
+            "name": "Digestive",
             "url": "http://google.com"
           },
           {
             "id": "3",
-            "name": "BBC",
+            "name": "Hobnob",
             "url": "http://bbc.co.uk"
           }
         ]

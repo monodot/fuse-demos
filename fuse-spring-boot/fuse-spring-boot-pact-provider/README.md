@@ -1,8 +1,8 @@
 # Fuse with Pact contract testing
 
-Demo of integrating Pact contract testing for a Fuse 7 application.
+Demo of integrating Pact contract testing for a Fuse 7 application. This uses the `pact-jvm-provider-spring` component.
 
-Includes a Camel RouteBuilder class which defines a REST service using the _servlet_ component.
+There is a Camel RouteBuilder class, which defines a REST service using the _servlet_ component.
 
 The test class, `CatalogueServiceContractTest`, uses the `SpringPactRunner`. It starts up the application context and fires up the web service on a random port. It uses Camel Mock endpoint to stub the call to the downstream system (which may be a database or object store) and return mock data, which will be populated in the response and satisfy the contract.
 
