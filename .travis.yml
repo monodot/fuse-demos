@@ -1,0 +1,11 @@
+language: java
+jdk:
+- openjdk8
+cache:
+  directories:
+  - "$HOME/.m2"
+install:
+- cp .travis.settings.xml $HOME/.m2/settings.xml
+- mvn dependency:go-offline
+script:
+- mvn -B clean install

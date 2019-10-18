@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <artifactId>fuse-demos-spring-boot</artifactId>
+        <groupId>xyz.tomd.fusedemos</groupId>
+        <version>1.0-SNAPSHOT</version>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+
+    <artifactId>fuse-spring-boot-spring-cloud-contract</artifactId>
+
+    <name>Tom Donohue :: Fuse Demos :: Spring Boot :: Spring Cloud Contract</name>
+    <description>Using Spring Cloud Contract with Fuse 7 BOM</description>
+
+    <properties>
+        <!-- As per https://spring.io/projects/spring-cloud -->
+        <!-- Edgware is compatible with Spring Boot 1.5, which is used by Fuse 7.3 -->
+        <spring-cloud.version>Edgware.SR6</spring-cloud.version>
+
+        <!-- Specifying the version here manually to use in the plugin section -->
+        <spring-cloud-contract.version>1.2.7.RELEASE</spring-cloud-contract.version>
+    </properties>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-dependencies</artifactId>
+                <version>${spring-cloud.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.apache.camel</groupId>
+            <artifactId>camel-spring-boot-starter</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.camel</groupId>
+            <artifactId>camel-servlet-starter</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.camel</groupId>
+            <artifactId>camel-swagger-java-starter</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.camel</groupId>
+            <artifactId>camel-jackson-starter</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.springframework.boot</groupId>
+                    <artifactId>spring-boot-starter-tomcat</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-undertow</artifactId>
+        </dependency>
+
+
+        <!-- For testing and Spring Cloud Contract stuff -->
+        <dependency>
+            <groupId>org.apache.camel</groupId>
+            <artifactId>camel-test-spring</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-contract-verifier</artifactId>
+        </dependency>
+
+    </dependencies>
+
+    <build>
+        <plugins>
+            <!--
+            This section taken from:
+            https://cloud.spring.io/spring-cloud-contract/1.2.x/single/spring-cloud-contract.html#_pact_for_producers
+
+            To run and generate test classes from the Pact JSON:
+            mvn clean install -DskipTests -Pspring-cloud-contract
+
+            Note that this creates tests using a Pact definition and runs them.
+            It doesn't actually run (in this version, anyway) a proper Pact "Provider Test".
+            -->
+            <plugin>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-contract-maven-plugin</artifactId>
+                <version>${spring-cloud-contract.version}</version>
+                <extensions>true</extensions>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>convert</goal>
+                            <goal>generateTests</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <!-- Will produce classes which `extend CatalogueBase` -->
+                    <packageWithBaseClasses>xyz.tomd.fusedemos.springcloudcontract</packageWithBaseClasses>
+
+                    <!--
+                    Pact JSON definitions will cause classes to be generated as follows:
+                    src/test/resources/contracts/catalogueService -> CatalogueSearch extends CatalogueBase
+                    src/test/resources/contracts/library -> LibraryTest extends LibraryBase
+                    Therefore you should create a Base class first.
+                    -->
+
+                    <!-- Use EXPLICIT test mode to send tests to an endpoint with your context path included -->
+                    <testMode>EXPLICIT</testMode>
+                </configuration>
+                <dependencies>
+                    <dependency>
+                        <groupId>org.springframework.cloud</groupId>
+                        <artifactId>spring-cloud-contract-spec-pact</artifactId>
+                        <version>${spring-cloud-contract.version}</version>
+                    </dependency>
+                    <dependency>
+                        <groupId>au.com.dius</groupId>
+                        <artifactId>pact-jvm-model</artifactId>
+                        <version>2.4.18</version>
+                    </dependency>
+                </dependencies>
+            </plugin>
+
+            <plugin>
+                <groupId>org.jboss.redhat-fuse</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <version>${version.org.jboss.redhat-fuse}</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>repackage</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+
+</project>
