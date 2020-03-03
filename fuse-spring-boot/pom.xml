@@ -20,9 +20,31 @@
         <module>fuse-spring-boot-pact-provider</module>
         <module>fuse-spring-boot-spring-cloud-contract</module>
         <module>fuse-spring-boot-encrypted-properties</module>
+        <module>fuse-spring-boot-amq-perf</module>
     </modules>
 
     <profiles>
+        <profile>
+            <id>fuse720</id>
+
+            <properties>
+                <version.org.jboss.redhat-fuse>7.2.0.fuse-720020-redhat-00001</version.org.jboss.redhat-fuse>
+            </properties>
+
+            <dependencyManagement>
+                <dependencies>
+                    <dependency>
+                        <groupId>org.jboss.redhat-fuse</groupId>
+                        <artifactId>fuse-springboot-bom</artifactId>
+                        <version>${version.org.jboss.redhat-fuse}</version>
+                        <scope>import</scope>
+                        <type>pom</type>
+                    </dependency>
+                </dependencies>
+            </dependencyManagement>
+
+        </profile>
+
         <profile>
             <id>fuse730</id>
 
@@ -47,11 +69,6 @@
         <profile>
             <!-- Fuse 7.4 on Spring Boot 1.x -->
             <id>fuse740sb1</id>
-
-            <!-- This is the default profile -->
-            <activation>
-                <activeByDefault>true</activeByDefault>
-            </activation>
 
             <properties>
                 <version.org.jboss.redhat-fuse>7.4.0.fuse-740036-redhat-00002</version.org.jboss.redhat-fuse>
@@ -81,6 +98,44 @@
                 </pluginManagement>
             </build>
 
+        </profile>
+
+        <profile>
+            <!-- Fuse 7.5 on Spring Boot 2.x -->
+            <id>fuse750sb2</id>
+
+            <!-- This is the default profile -->
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+
+            <properties>
+                <version.org.jboss.redhat-fuse>7.5.0.fuse-sb2-750029-redhat-00003</version.org.jboss.redhat-fuse>
+            </properties>
+
+            <dependencyManagement>
+                <dependencies>
+                    <dependency>
+                        <groupId>org.jboss.redhat-fuse</groupId>
+                        <artifactId>fuse-springboot-bom</artifactId>
+                        <version>${version.org.jboss.redhat-fuse}</version>
+                        <scope>import</scope>
+                        <type>pom</type>
+                    </dependency>
+                </dependencies>
+            </dependencyManagement>
+
+            <build>
+                <pluginManagement>
+                    <plugins>
+                        <plugin>
+                            <groupId>org.jboss.redhat-fuse</groupId>
+                            <artifactId>spring-boot-maven-plugin</artifactId>
+                            <version>${version.org.jboss.redhat-fuse}</version>
+                        </plugin>
+                    </plugins>
+                </pluginManagement>
+            </build>
         </profile>
     </profiles>
 
