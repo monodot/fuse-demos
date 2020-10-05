@@ -1,0 +1,79 @@
+# Fuse 7.7: Contract-first-API development with Apicurio
+
+## First: design an API
+
+First Run API Designer / Apicurio Studio in your environment.
+
+- **Run locally:** with [Docker compose](https://github.com/Apicurio/apicurio-studio/blob/master/distro/docker-compose/Readme.md)
+- **Run on OpenShift:** by deploying the API Studio operator into your Project:
+
+```
+oc get packagemanifests -n openshift-marketplace
+oc describe packagemanifest fuse-apicurito -n openshift-marketplace
+
+oc new-project tomd-apicurio
+
+oc apply -f - <<API
+apiVersion: operators.coreos.com/v1
+kind: OperatorGroup
+metadata:
+  name: tomd-apicurio-operators
+  namespace: tomd-apicurio
+spec:
+  targetNamespaces:
+  - tomd-apicurio
+API
+
+oc apply -f - <<API
+apiVersion: operators.coreos.com/v1alpha1
+kind: Subscription
+metadata:
+  name: fuse-apicurito-sub
+  namespace: tomd-apicurio
+spec:
+  channel: alpha
+  name: fuse-apicurito
+  source: redhat-operators
+  sourceNamespace: openshift-marketplace
+API
+
+oc apply -f - <<API
+apiVersion: apicur.io/v1alpha1
+kind: Apicurito
+metadata:
+  name: apicurito-service
+  namespace: tomd-apicurio
+spec:
+  size: 1
+API
+```
+
+Fetch the URL to the API Designer UI and open it (e.g. `xdg-open`, `open`...)
+
+```
+xdg-open https://$(oc get route apicurito-service-ui --template '{{.spec.host}}')
+```
+
+Design your API using API Designer. 🍸
+
+![cocktail](api-designer.png)
+
+Save/download the JSON from API Designer.
+
+## Generate Camel routes from the OpenAPI spec
+
+Copy the OpenAPI JSON file to `src/spec/my-api.json`:
+
+```
+mkdir src/spec
+mv ~/Downloads/openapi-spec.json ./src/spec
+```
+
+Then generate REST DSL code for Camel by running the camel-restdsl-openapi-plugin:
+
+```
+mvn camel-restdsl-openapi:generate
+```
+
+See [camel-restdsl-openapi-plugin 2.23 documentation](https://github.com/apache/camel/blob/camel-2.23.2/tooling/maven/camel-restdsl-swagger-plugin/src/main/docs/camel-restdsl-swagger-plugin.adoc) for all the configuration options available.
+

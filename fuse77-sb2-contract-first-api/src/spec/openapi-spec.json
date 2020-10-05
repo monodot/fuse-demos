@@ -1,0 +1,145 @@
+{
+    "openapi": "3.0.2",
+    "info": {
+        "title": "New API",
+        "version": "1.0.0",
+        "description": "A brand new API with no content.  Go nuts!"
+    },
+    "paths": {
+        "/cocktails": {
+            "summary": "Path used to manage the list of cocktails.",
+            "description": "The REST endpoint/path used to list and create zero or more `cocktail` entities.  This path contains a `GET` and `POST` operation to perform the list and create tasks, respectively.",
+            "get": {
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/cocktail"
+                                    }
+                                }
+                            }
+                        },
+                        "description": "Successful response - returns an array of `cocktail` entities."
+                    }
+                },
+                "operationId": "getcocktails",
+                "summary": "List All cocktails",
+                "description": "Gets a list of all `cocktail` entities."
+            },
+            "post": {
+                "requestBody": {
+                    "description": "A new `cocktail` to be created.",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/cocktail"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "201": {
+                        "description": "Successful response."
+                    }
+                },
+                "operationId": "createcocktail",
+                "summary": "Create a cocktail",
+                "description": "Creates a new instance of a `cocktail`."
+            }
+        },
+        "/cocktails/{cocktailId}": {
+            "summary": "Path used to manage a single cocktail.",
+            "description": "The REST endpoint/path used to get, update, and delete single instances of an `cocktail`.  This path contains `GET`, `PUT`, and `DELETE` operations used to perform the get, update, and delete tasks, respectively.",
+            "get": {
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/cocktail"
+                                }
+                            }
+                        },
+                        "description": "Successful response - returns a single `cocktail`."
+                    }
+                },
+                "operationId": "getcocktail",
+                "summary": "Get a cocktail",
+                "description": "Gets the details of a single instance of a `cocktail`."
+            },
+            "put": {
+                "requestBody": {
+                    "description": "Updated `cocktail` information.",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/cocktail"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "202": {
+                        "description": "Successful response."
+                    }
+                },
+                "operationId": "updatecocktail",
+                "summary": "Update a cocktail",
+                "description": "Updates an existing `cocktail`."
+            },
+            "delete": {
+                "responses": {
+                    "204": {
+                        "description": "Successful response."
+                    }
+                },
+                "operationId": "deletecocktail",
+                "summary": "Delete a cocktail",
+                "description": "Deletes an existing `cocktail`."
+            },
+            "parameters": [
+                {
+                    "name": "cocktailId",
+                    "description": "A unique identifier for a `cocktail`.",
+                    "schema": {
+                        "type": "string"
+                    },
+                    "in": "path",
+                    "required": true
+                }
+            ]
+        }
+    },
+    "components": {
+        "schemas": {
+            "cocktail": {
+                "title": "Root Type for cocktail",
+                "description": "Refreshing beverage",
+                "type": "object",
+                "properties": {
+                    "name": {
+                        "type": "string"
+                    },
+                    "rating": {
+                        "format": "double",
+                        "type": "number"
+                    },
+                    "strength": {
+                        "format": "int32",
+                        "type": "integer"
+                    }
+                },
+                "example": {
+                    "name": "Dry Martini",
+                    "rating": 8.5,
+                    "strength": 3
+                }
+            }
+        }
+    }
+}
