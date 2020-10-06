@@ -1,5 +1,28 @@
 # Fuse 7.7: Contract-first-API development with Apicurio
 
+## Prerequisites: prepare the OpenShift cluster
+
+If deploying this app to an OpenShift cluster, first add your Red Hat registry token as a Secret in your project:
+
+```
+oc create secret docker-registry redhat-registry-secret \
+  --docker-username="12345678|yourserviceaccountname" \
+  --docker-password=xxxxxxxx \
+  --docker-server=registry.redhat.io
+
+oc secrets link builder redhat-registry-secret
+
+oc secrets link default redhat-registry-secret --for=pull
+```
+
+add the Fuse imagestreams first, into the `openshift` project, e.g.:
+
+```
+oc import-image fuse7-java-openshift:1.7 -n openshift --from=registry.redhat.io/fuse7/fuse-java-openshift:1.7
+
+oc tag registry.redhat.io/fuse7/fuse-java-openshift:1.7 openshift/fuse7-java-openshift:1.7
+```
+
 ## First: design an API
 
 First Run API Designer / Apicurio Studio in your environment.
@@ -89,7 +112,13 @@ When you've finished, save/download the JSON from API Designer.
 
 3.  Implement any Camel routes as required (one sample method has already been provided in `CamelRouter`).
 
-4.  Finally run the app:
+4.  Finally, deploy the application to OpenShift:
+
+    ```
+    mvn fabric8:deploy -Popenshift    
+    ```
+
+    Or, you can run it locally.
 
     ```
     mvn clean spring-boot:run
