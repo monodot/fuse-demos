@@ -3,6 +3,7 @@ package xyz.tomd.fusedemos.fuse77contractfirst;
 import org.apache.camel.Exchange;
 import org.apache.camel.Processor;
 import org.apache.camel.builder.RouteBuilder;
+import org.apache.camel.model.dataformat.JsonLibrary;
 import org.apache.camel.model.rest.RestBindingMode;
 import org.springframework.stereotype.Component;
 import xyz.tomd.fusedemos.fuse77contractfirst.model.Cocktail;
@@ -35,6 +36,7 @@ public class CamelRouter extends RouteBuilder {
                         exchange.getMessage().setBody(cocktail);
                     }
                 })
+                .marshal().json(JsonLibrary.Jackson)
                 .log("Returning ${body}");
 
         /**
