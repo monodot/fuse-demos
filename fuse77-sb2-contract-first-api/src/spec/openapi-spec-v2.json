@@ -1,0 +1,139 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "title": "Cocktail API",
+        "version": "1.0.0",
+        "description": "A brand new API with no content.  Go cocktail nuts!"
+    },
+    "consumes": [
+        "application/json"
+    ],
+    "produces": [
+        "application/json"
+    ],
+    "paths": {
+        "/cocktails": {
+            "get": {
+                "responses": {
+                    "200": {
+                        "description": "Successful response - returns an array of `cocktail` entities.",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/cocktail"
+                            }
+                        }
+                    }
+                },
+                "operationId": "getcocktails",
+                "summary": "List All cocktails",
+                "description": "Gets a list of all `cocktail` entities."
+            },
+            "post": {
+                "parameters": [
+                    {
+                        "name": "body",
+                        "description": "A new `cocktail` to be created.",
+                        "schema": {
+                            "$ref": "#/definitions/cocktail"
+                        },
+                        "in": "body",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Successful response."
+                    }
+                },
+                "operationId": "createcocktail",
+                "summary": "Create a cocktail",
+                "description": "Creates a new instance of a `cocktail`."
+            }
+        },
+        "/cocktails/{cocktailId}": {
+            "get": {
+                "responses": {
+                    "200": {
+                        "description": "Successful response - returns a single `cocktail`.",
+                        "schema": {
+                            "$ref": "#/definitions/cocktail"
+                        }
+                    }
+                },
+                "operationId": "getcocktail",
+                "summary": "Get a cocktail",
+                "description": "Gets the details of a single instance of a `cocktail`."
+            },
+            "put": {
+                "parameters": [
+                    {
+                        "name": "body",
+                        "description": "Updated `cocktail` information.",
+                        "schema": {
+                            "$ref": "#/definitions/cocktail"
+                        },
+                        "in": "body",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "202": {
+                        "description": "Successful response."
+                    }
+                },
+                "operationId": "updatecocktail",
+                "summary": "Update a cocktail",
+                "description": "Updates an existing `cocktail`."
+            },
+            "delete": {
+                "responses": {
+                    "204": {
+                        "description": "Successful response."
+                    }
+                },
+                "operationId": "deletecocktail",
+                "summary": "Delete a cocktail",
+                "description": "Deletes an existing `cocktail`."
+            },
+            "parameters": [
+                {
+                    "name": "cocktailId",
+                    "description": "A unique identifier for a `cocktail`.",
+                    "in": "path",
+                    "required": true,
+                    "type": "string"
+                }
+            ]
+        }
+    },
+    "definitions": {
+        "cocktail": {
+            "title": "Root Type for cocktail",
+            "description": "Refreshing beverage",
+            "type": "object",
+            "properties": {
+                "name": {
+                    "type": "string"
+                },
+                "rating": {
+                    "format": "double",
+                    "type": "number"
+                },
+                "strength": {
+                    "format": "int32",
+                    "type": "integer"
+                },
+                "garnish": {
+                    "type": "string"
+                }
+            },
+            "example": {
+                "name": "Dry Martini",
+                "rating": 8.5,
+                "strength": 3,
+                "garnish": "olive"
+            }
+        }
+    }
+}

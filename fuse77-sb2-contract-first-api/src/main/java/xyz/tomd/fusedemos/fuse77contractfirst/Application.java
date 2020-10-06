@@ -1,4 +1,4 @@
-package com.redhat.fuse.boosters.rest.http;
+package xyz.tomd.fusedemos.fuse77contractfirst;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
