@@ -64,36 +64,36 @@ Fetch the URL to the API Designer UI and open it (e.g. `xdg-open`, `open`...)
 xdg-open https://$(oc get route apicurito-service-ui --template '{{.spec.host}}')
 ```
 
-In API Designer, create an OpenAPI V2 API, and then design your API as you like: 🍸
+In API Designer, create a new API, and then design it however you like: 🍸
 
 ![cocktail](api-designer.png)
 
-Save/download the JSON from API Designer.
+When you've finished, save/download the JSON from API Designer.
 
-## Generate Camel routes from the OpenAPI spec
+## Generate Camel routes from the OpenAPI spec and run the app
 
-Copy the OpenAPI JSON file to `src/spec/openapi-spec.json`:
+1.  Copy the OpenAPI JSON file to `src/spec/openapi-spec.json`:
 
-```
-mkdir src/spec
-mv ~/Downloads/openapi-spec.json ./src/spec
-```
+    ```
+    mkdir src/spec
+    mv ~/Downloads/openapi-spec.json ./src/spec
+    ```
 
-Then generate REST DSL Java code for Camel, by running the camel-restdsl-openapi-plugin:
+2.  Then generate REST DSL Java code for Camel, by running the camel-restdsl-openapi-plugin:
 
-```
-mvn camel-restdsl-openapi:generate-with-dto
-```
+    ```
+    mvn camel-restdsl-openapi:generate-with-dto
+    ```
 
-See [camel-restdsl-openapi-plugin 2.23 documentation](https://github.com/apache/camel/blob/camel-2.23.2/tooling/maven/camel-restdsl-swagger-plugin/src/main/docs/camel-restdsl-swagger-plugin.adoc) for all the configuration options available.
+    See [camel-restdsl-openapi-plugin 2.23 documentation](https://github.com/apache/camel/blob/camel-2.23.2/tooling/maven/camel-restdsl-swagger-plugin/src/main/docs/camel-restdsl-swagger-plugin.adoc) for all the configuration options available.
 
-Implement any Camel routes as required (one sample method has already been provided in `CamelRouter`).
+3.  Implement any Camel routes as required (one sample method has already been provided in `CamelRouter`).
 
-Finally run the app:
+4.  Finally run the app:
 
-```
-mvn clean spring-boot:run
-```
+    ```
+    mvn clean spring-boot:run
+    ```
 
 ## Troubleshooting an IDE
 
