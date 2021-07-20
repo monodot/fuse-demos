@@ -24,6 +24,7 @@ public class CamelRouter extends RouteBuilder {
          * e.g. GET /cocktails => direct:getcocktails
          */
         from("direct:getcocktails")
+                .hystrix()
                 .process(new Processor() {
                     @Override
                     public void process(Exchange exchange) throws Exception {
