@@ -36,7 +36,7 @@ Subsequent manual steps:
 
 To list all resources in AWS:
 
-    $ cd ../aws-tools
+    $ cd ../aws-inventory-ansible
     $ ./ec2.py
     
 To reset the cached list of EC2 instances:
