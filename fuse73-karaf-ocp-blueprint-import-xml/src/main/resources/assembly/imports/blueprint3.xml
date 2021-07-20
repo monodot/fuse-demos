@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<blueprint xmlns="http://www.osgi.org/xmlns/blueprint/v1.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="
+             http://www.osgi.org/xmlns/blueprint/v1.0.0 https://www.osgi.org/xmlns/blueprint/v1.0.0/blueprint.xsd
+             http://camel.apache.org/schema/blueprint http://camel.apache.org/schema/blueprint/camel-blueprint.xsd">
+
+    <manifest xmlns="http://karaf.apache.org/xmlns/deployer/blueprint/v1.0.0"
+              xsi:schemaLocation="http://karaf.apache.org/xmlns/deployer/blueprint/v1.0.0 http://karaf.apache.org/xmlns/deployer/blueprint/v1.0.0">
+        Bundle-SymbolicName = xyz.tomd.fusedemos.fragments.blueprint3
+        Fragment-Host = xyz.tomd.fusedemos.blueprint-import-xml
+    </manifest>
+
+    <camelContext xmlns="http://camel.apache.org/schema/blueprint">
+
+        <route id="second-route">
+            <from uri="timer:mytimer?period=5000&amp;delay=2000"/>
+            <log message="Hello from the 3rd context"/>
+        </route>
+
+    </camelContext>
+
+</blueprint>

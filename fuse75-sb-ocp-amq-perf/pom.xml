@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <artifactId>fuse-spring-boot-demos</artifactId>
+        <groupId>xyz.tomd.demos.fuse</groupId>
+        <version>1.0-SNAPSHOT</version>
+        <relativePath>../</relativePath>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+
+    <artifactId>fuse-spring-boot-amq-perf</artifactId>
+
+    <name>Tom Donohue :: Fuse Demos :: Spring Boot :: AMQ Performance Demo</name>
+    <description>Performance testing demo for Fuse on Spring Boot</description>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.apache.camel</groupId>
+            <artifactId>camel-spring-boot-starter</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.camel</groupId>
+            <artifactId>camel-servlet-starter</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.springframework.boot</groupId>
+                    <artifactId>spring-boot-starter-tomcat</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-undertow</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.camel</groupId>
+            <artifactId>camel-http</artifactId>
+            <version>2.23.2</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.camel</groupId>
+            <artifactId>camel-jms-starter</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.activemq</groupId>
+            <artifactId>artemis-jms-client</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>javax.json</groupId>
+            <artifactId>javax.json-api</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.camel</groupId>
+            <artifactId>camel-test-spring</artifactId>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.jboss.redhat-fuse</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <version>${version.org.jboss.redhat-fuse}</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>repackage</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+
+    <profiles>
+        <profile>
+            <id>fuse720</id>
+
+            <properties>
+                <version.org.jboss.redhat-fuse>7.2.0.fuse-720020-redhat-00001</version.org.jboss.redhat-fuse>
+            </properties>
+
+            <dependencyManagement>
+                <dependencies>
+                    <dependency>
+                        <groupId>org.jboss.redhat-fuse</groupId>
+                        <artifactId>fuse-springboot-bom</artifactId>
+                        <version>${version.org.jboss.redhat-fuse}</version>
+                        <scope>import</scope>
+                        <type>pom</type>
+                    </dependency>
+                </dependencies>
+            </dependencyManagement>
+
+        </profile>
+
+        <profile>
+            <id>fuse730</id>
+
+            <properties>
+                <version.org.jboss.redhat-fuse>7.3.0.fuse-730058-redhat-00001</version.org.jboss.redhat-fuse>
+            </properties>
+
+            <dependencyManagement>
+                <dependencies>
+                    <dependency>
+                        <groupId>org.jboss.redhat-fuse</groupId>
+                        <artifactId>fuse-springboot-bom</artifactId>
+                        <version>${version.org.jboss.redhat-fuse}</version>
+                        <scope>import</scope>
+                        <type>pom</type>
+                    </dependency>
+                </dependencies>
+            </dependencyManagement>
+
+        </profile>
+
+        <profile>
+            <!-- Fuse 7.4 on Spring Boot 1.x -->
+            <id>fuse740sb1</id>
+
+            <properties>
+                <version.org.jboss.redhat-fuse>7.4.0.fuse-740036-redhat-00002</version.org.jboss.redhat-fuse>
+            </properties>
+
+            <dependencyManagement>
+                <dependencies>
+                    <dependency>
+                        <groupId>org.jboss.redhat-fuse</groupId>
+                        <artifactId>fuse-springboot-bom</artifactId>
+                        <version>${version.org.jboss.redhat-fuse}</version>
+                        <scope>import</scope>
+                        <type>pom</type>
+                    </dependency>
+                </dependencies>
+            </dependencyManagement>
+
+            <build>
+                <pluginManagement>
+                    <plugins>
+                        <plugin>
+                            <groupId>org.jboss.redhat-fuse</groupId>
+                            <artifactId>spring-boot-maven-plugin</artifactId>
+                            <version>${version.org.jboss.redhat-fuse}</version>
+                        </plugin>
+                    </plugins>
+                </pluginManagement>
+            </build>
+
+        </profile>
+
+        <profile>
+            <!-- Fuse 7.5 on Spring Boot 2.x -->
+            <id>fuse750sb2</id>
+
+            <!-- This is the default profile -->
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+
+            <properties>
+                <version.org.jboss.redhat-fuse>7.5.0.fuse-sb2-750029-redhat-00003</version.org.jboss.redhat-fuse>
+            </properties>
+
+            <dependencyManagement>
+                <dependencies>
+                    <dependency>
+                        <groupId>org.jboss.redhat-fuse</groupId>
+                        <artifactId>fuse-springboot-bom</artifactId>
+                        <version>${version.org.jboss.redhat-fuse}</version>
+                        <scope>import</scope>
+                        <type>pom</type>
+                    </dependency>
+                </dependencies>
+            </dependencyManagement>
+
+            <build>
+                <pluginManagement>
+                    <plugins>
+                        <plugin>
+                            <groupId>org.jboss.redhat-fuse</groupId>
+                            <artifactId>spring-boot-maven-plugin</artifactId>
+                            <version>${version.org.jboss.redhat-fuse}</version>
+                        </plugin>
+                    </plugins>
+                </pluginManagement>
+            </build>
+        </profile>
+    </profiles>
+
+
+</project>

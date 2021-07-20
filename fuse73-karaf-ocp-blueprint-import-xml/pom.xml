@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <artifactId>fuse-demos-karaf</artifactId>
+        <groupId>xyz.tomd.fusedemos</groupId>
+        <version>1.0-SNAPSHOT</version>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+
+    <artifactId>blueprint-import-xml</artifactId>
+    <packaging>bundle</packaging>
+
+    <name>Tom Donohue :: Fuse Demos :: Karaf :: Blueprint Import XML</name>
+    <description>Embedding and exposing a build number</description>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.apache.camel</groupId>
+            <artifactId>camel-core</artifactId>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.osgi</groupId>
+            <artifactId>org.osgi.core</artifactId>
+            <scope>provided</scope>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.felix</groupId>
+                <artifactId>maven-bundle-plugin</artifactId>
+                <extensions>true</extensions>
+                <configuration>
+                    <instructions>
+                        <Bundle-Activator>xyz.tomd.fusedemos.blueprintimportxml.Activator</Bundle-Activator>
+                        <!-- Bundle-Symbolic name is: xyz.tomd.fusedemos.blueprint-import-xml -->
+                    </instructions>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
+    <profiles>
+
+        <profile>
+            <id>fuse730</id>
+
+            <!-- This is the default profile -->
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+
+            <properties>
+                <version.org.jboss.redhat-fuse>7.3.0.fuse-730058-redhat-00001</version.org.jboss.redhat-fuse>
+
+                <!-- Ensure you use the same version of Artemis client supported in Fuse -->
+                <version.artemis>2.6.3.redhat-00015</version.artemis>
+            </properties>
+
+            <dependencyManagement>
+                <dependencies>
+                    <dependency>
+                        <groupId>org.jboss.redhat-fuse</groupId>
+                        <artifactId>fuse-karaf-bom</artifactId>
+                        <version>${version.org.jboss.redhat-fuse}</version>
+                        <scope>import</scope>
+                        <type>pom</type>
+                    </dependency>
+                </dependencies>
+            </dependencyManagement>
+
+        </profile>
+    </profiles>
+
+</project>
